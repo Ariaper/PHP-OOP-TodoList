@@ -6,7 +6,8 @@ class App
     function add($note)
     {
         $query_add = $this->connect()->prepare("INSERT INTO notes (note) VALUES (:note)");
-        $query_add->execute(['note' => $note]);
+		$query_add->bindParam(':note', $note);
+        $query_add->execute();
 
     }
 
@@ -20,6 +21,7 @@ class App
     function delete($id)
     {
         $query_delete = $this->connect()->prepare("DELETE FROM notes WHERE id = :id");
-        $query_delete->execute(['id' => $id]);
+		$query_delete->bindParam(':id', $id);
+        $query_delete->execute();
     }
 }
